@@ -10,9 +10,9 @@ OBS.: This document is still under construction.
 Contributions should be first be opened as [issues](https://github.com/larocs/RoCS/issues). So, before openning a pull request with contribution, please be sure there is an open issue demanding it.
 
 ### Issues should be opened for: 
-* Request new features or enhancements: consider to ask for new characteristics, funcionalities, or enhancements in the framework. Features considered unfeasible, inappropriate, or violating the principles of the RoCS framework will be closed. 
-* Bug fixes: did you experienced any bug that you cannot or do not know how to fix. Please, be sure it is a framework problem and open an issue.
-* Request additional documentation: documentation is hard to keep up-to-date. So keep it inn mind before asking for new documentation effort. If you believe a documentation is essential, please open a issue describing exactly what is to be document and the motivation for that.
+* **Requesting new features or enhancements.** Consider asking for new characteristics, funcionalities, or enhancements in the framework. Features considered unfeasible, inappropriate, or violating the principles of the RoCS framework will be closed. 
+* **Bug fixes.** Did you experience any bug that you cannot or do not know how to fix. Please, be sure it is a framework problem and open an issue.
+* **Requesting additional documentation.** documentation is hard to keep up-to-date. So keep it in mind before asking for new documentation effort. If you believe a documentation is essential, please open a issue describing exactly what is to be document and the motivation for that.
 
 ### Labels
 Please, do not use customized labels to show your intentions. 
@@ -27,4 +27,4 @@ To be defined.
 
 ## External Documentation
 
-Leonardo Ramos, Gabriel Divino, Breno Bernard Nicolau de França, Leonardo Montecchi, Esther Colombini. The RoCS Framework to Support the Development of Autonomous Robots. In: 22nd Ibero-American Conference on Software Engineering (CIbSE). La Habana, Cuba. April, 2019. [paper](http://www.ic.unicamp.br/~leonardo/publications/pdf/2019CIBSE.pdf)
+* Leonardo Ramos, Gabriel Divino, Breno Bernard Nicolau de França, Leonardo Montecchi, Esther Colombini. "[The RoCS Framework to Support the Development of Autonomous Robots](http://www.ic.unicamp.br/~leonardo/publications/pdf/2019CIBSE.pdf)". In: 22nd Ibero-American Conference on Software Engineering (CIbSE). La Habana, Cuba. April, 2019.
