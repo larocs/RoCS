@@ -1,0 +1,14 @@
+include(FindPkgConfig)
+
+set(CMAKE_CXX_STANDARD 17)
+#IF (CMAKE_COMPILER_IS_GNUCC)
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -DBUILD_SHARED_LIBS=OFF ")
+#ENDIF (CMAKE_COMPILER_IS_GNUCC)
+
+file(GLOB SOURCES "*/*.cpp")
+
+file(GLOB HEADERS "*/*.h")
+
+
+add_library(remote_api ${SOURCES} ${HEADERS})
+
