@@ -11,10 +11,31 @@ Some important principles what we belive to be advantages of adopting the RoCS f
 # Getting Started
 
 ## Requirements and Dependencies
-Under construction.
+- VREP
+- a c++ compiler
+- make and cmake
 
 ## Setting up
-Under construction.
+These instructions were tested in Arch Linux, Fedora 23 and MacOS.
+- To compile, execute the compile_pioneer_and_robotnik.sh script
+- Change the remoteApiConnections.txt file in VREP directory and make sure it has the following lines:
+
+```
+portIndex1_port             = 19997
+portIndex1_debug            = false
+portIndex1_syncSimTrigger   = true
+
+portIndex2_port             = 19998
+portIndex2_debug            = false
+portIndex2_syncSimTrigger   = true
+```
+
+- Open VREP and load the scene ./vrep/scene_02.ttt
+- Start the simulation pressing the play button
+- To execute the code for the Pioneer run ./pioneer_wall_tests/cmake-build-debug/pioneer_xwalk
+- To execute the code for the Robotnik run ./robotnik_follow/cmake-build-debug/robotnik_follow
+
+
 
 # Interested in contributing to RoCS?
 Thanks for the interest and please read the [Contributing](https://github.com/larocs/RoCS/blob/master/CONTRIBUTING.md) recommendations.
