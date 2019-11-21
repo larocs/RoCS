@@ -8,3 +8,8 @@ RoCS.cbp
 cmake_install.cmake
 cmpl
 */cmake-build-debug/*
+*~
+*.swp
+*.swo
+tags
+
