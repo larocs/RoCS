@@ -1,4 +1,4 @@
-# Contributing guidelines for the RoCS Framwork project
+# Contributing guidelines for the RoCS Framework project
 
 Are you interested in contributing for the development of the RoCS framework? 
 Please read carefully the following recommendations.
