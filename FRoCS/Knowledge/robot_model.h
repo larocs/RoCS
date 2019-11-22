@@ -22,12 +22,12 @@ protected:
 public:
 
 	explicit RobotModel(std::string name_)
-		:name(std::move(name)), position(), orientation()
+		:name(std::move(name_)), position(), orientation()
 	{
 	}
 
 	RobotModel(std::string name_, Position position_, Orientation orientation_)
-		:name(std::move(name)), position(position_), orientation(orientation_)
+		:name(std::move(name_)), position(position_), orientation(orientation_)
 	{
 	}
 
