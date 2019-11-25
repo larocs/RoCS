@@ -49,11 +49,11 @@ void FileVisualizer::run()
 
 		if(ea.isValid() && pos.isValid() && action != nullptr)
 		{
-			double x = pos.getX();
-			double y = pos.getY();
-			double t = ea.getGamma();
+//			double x = pos.getX();
+//			double y = pos.getY();
+//			double t = ea.getGamma();
 
-			my_file << x << ", " << y << ", " << t << ", " << action->getName() << "\n";
+//			my_file << x << ", " << y << ", " << t << ", " << action->getName() << "\n";
 		}
 
 		std::this_thread::sleep_for(std::chrono::milliseconds(waiting_time));

@@ -12,20 +12,22 @@
 #include "../Analyze/pass_robotnik_position.h"
 #include "../Analyze/pass_vrep_position.h"
 #include "../Analyze/pass_vrep_orientation.h"
+#include "../Analyze/pass_vrep_accelerometer.h"
 
 class GoToP3DXPlanner : public Planner
 {
 private:
 	PassVREPPosition &position_analyze;
 	PassVREPOrientation &orientation_analyze;
+	PassVREPAccelerometer &accelerometer_analyze;
 	PassRobotnikPosition &p3dx_positon_analyze;
 
 	int state;
 	Position destination;
 
 public:
-	GoToP3DXPlanner(Knowledge &knowledge, PassVREPPosition &position_analyze,
-			PassVREPOrientation &orientation_analyze, PassRobotnikPosition &p3dx_positon_analyze_);
+	GoToP3DXPlanner(Knowledge &knowledge, PassVREPPosition &position_analyze, PassVREPOrientation &orientation_analyze,
+      PassVREPAccelerometer &accelerometer_analyze, PassRobotnikPosition &p3dx_positon_analyze_);
 
 	void planIteration() override;
 

@@ -16,8 +16,9 @@ class WheelVREP : public RotaryMotor
 private:
 	int handle;
 	Connection &connection;
+  int rotorNumber;
 public:
-	WheelVREP(std::string name_, Connection &connection_);
+	WheelVREP(int name_, Connection &connection_);
 
 	void setSpeed(double speed);
 

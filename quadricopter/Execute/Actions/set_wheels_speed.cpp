@@ -38,10 +38,10 @@ void SetWheelsSpeed::act()
 	if (left_wheel && right_wheel)
 	{
 //		std::cout << "Actuator go\n";
-		(*left_wheel).setSpeed(left_wheel_speed);
-		(*right_wheel).setSpeed(-right_wheel_speed);
-		(*back_left_wheel).setSpeed(left_wheel_speed);
-		(*back_right_wheel).setSpeed(-right_wheel_speed);
+    (*left_wheel).setSpeed(56.2);
+		(*right_wheel).setSpeed(50.2);
+		(*back_left_wheel).setSpeed(50.2);
+		(*back_right_wheel).setSpeed(50.2);
 	}
 	else
 	{

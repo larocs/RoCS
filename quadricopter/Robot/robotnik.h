@@ -15,15 +15,18 @@
 
 #include "../Sensors/P3DXPositionSensor.h"
 #include "../Sensors/orientation_vrep_sensor.h"
+#include "../Sensors/accelerometer_vrep_sensor.h"
 #include "../Sensors/position_vrep_sensor.h"
 
 #include "../Monitor/P3DXPositionMonitor.h"
 #include "../Monitor/range_vrep_monitor.h"
 #include "../Monitor/position_vrep_monitor.h"
 #include "../Monitor/orientation_vrep_monitor.h"
+#include "../Monitor/accelerometer_vrep_monitor.h"
 #include "../Analyze/pass_vrep_range.h"
 #include "../Analyze/pass_vrep_position.h"
 #include "../Analyze/pass_vrep_orientation.h"
+#include "../Analyze/pass_vrep_accelerometer.h"
 #include "../Plan/go_to_p3dx_planner.h"
 #include "../Visualizer/file_visualizer.h"
 
@@ -38,6 +41,7 @@ private:
 	//	SENSORS
 	std::vector<RangeVREPSensor> range_sensors;
 	OrientationVREPSensor orientation_sensor;
+  AccelerometerVREPSensor acceleration_sensor;
 	PositionVREPSensor position_sensor;
 	PositionVREPSensor p3dx_position_sensor;
 
@@ -47,15 +51,17 @@ private:
 
 
 	//	MONITORS
-	RangeVREPMonitor range_monitor;
+	// TODO RangeVREPMonitor range_monitor;
 	PositionVREPMonitor position_monitor;
 	OrientationVREPMonitor orientation_monitor;
+	AccelerometerVREPMonitor accelerometer_monitor;
 	PositionVREPMonitor p3dx_position_monitor;
 
 	//	ANALYZES
-	PassVREPRange range_analyze;
+	// TODO PassVREPRange range_analyze;
 	PassVREPPosition position_analyze;
 	PassVREPOrientation orientation_analyze;
+	PassVREPAccelerometer accelerometer_analyze;
 	PassRobotnikPosition p3dx_position_analyze;
 
 	//  PLANNER
@@ -91,6 +97,8 @@ private:
 	void connectToProximitySensors();
 
 	void connectToOrientationSensor();
+
+	void connectToAccelerometerSensor();
 
 	void connectToPositionSensor();
 

@@ -13,12 +13,12 @@ extern "C"
 }
 
 Robotnik::Robotnik()
-	:Robot("Robotnik_Summit_XL"), connection(knowledge.getConnection()), range_sensors(),
-	 orientation_sensor(connection), position_sensor(connection), p3dx_position_sensor(connection), wheels(),
-	 wheel_ptrs(), range_monitor(knowledge), position_monitor(knowledge), orientation_monitor(knowledge),
-	 p3dx_position_monitor(knowledge), range_analyze(knowledge), position_analyze(knowledge),
-	 orientation_analyze(knowledge), p3dx_position_analyze(knowledge), planner(knowledge, position_analyze,
-	 		orientation_analyze, p3dx_position_analyze), file_visualizer{knowledge}, lifetime(100)
+	:Robot("Quadricopter"), connection(knowledge.getConnection()), /*range_sensors(),*/ orientation_sensor(connection),
+   acceleration_sensor(connection), position_sensor(connection), p3dx_position_sensor(connection), wheels(),
+	 wheel_ptrs(), /*range_monitor(knowledge),*/ position_monitor(knowledge), orientation_monitor(knowledge),
+   accelerometer_monitor(knowledge), p3dx_position_monitor(knowledge), /*range_analyze(knowledge),*/ position_analyze(knowledge),
+	 orientation_analyze(knowledge), accelerometer_analyze(knowledge), p3dx_position_analyze(knowledge),
+   planner(knowledge, position_analyze, orientation_analyze, accelerometer_analyze, p3dx_position_analyze), file_visualizer{knowledge}, lifetime(300)
 {
 	verifyConnection();
 
@@ -50,14 +50,16 @@ Robotnik::Robotnik()
 
 void Robotnik::run()
 {
-	range_monitor.startThread();
+	// TODO range_monitor.startThread();
 	position_monitor.startThread();
 	orientation_monitor.startThread();
+	accelerometer_monitor.startThread();
 	p3dx_position_monitor.startThread();
 
-	range_analyze.startThread();
+	// TODO range_analyze.startThread();
 	position_analyze.startThread();
 	orientation_analyze.startThread();
+	accelerometer_analyze.startThread();
 	p3dx_position_analyze.startThread();
 
 	execute.startThread();
@@ -108,6 +110,14 @@ void Robotnik::connectToOrientationSensor()
 //	std::cout << "First Ori: " << robot_orientation << std::endl;
 }
 
+void Robotnik::connectToAccelerometerSensor()
+{
+	acceleration_sensor.connect();
+	Orientation robot_acceleration;
+	acceleration_sensor.getData(robot_acceleration);
+//	std::cout << "First Ori: " << robot_orientation << std::endl;
+}
+
 void Robotnik::connectToPositionSensor()
 {
 	position_sensor.connect(connection.getRobotHandle());
@@ -115,7 +125,6 @@ void Robotnik::connectToPositionSensor()
 	position_sensor.getData(robot_position);
 //	std::cout << "First Pos: " << robot_position << std::endl;
 }
-
 
 void Robotnik::connectToP3DXPositionSensor()
 {
@@ -133,10 +142,10 @@ void Robotnik::connectToP3DXPositionSensor()
 
 void Robotnik::connectToWheels()
 {
-	std::string front_left_wheel_name = "joint_front_left_wheel";
-	std::string front_right_wheel_name = "joint_front_right_wheel";
-	std::string back_right_wheel_name = "joint_back_right_wheel";
-	std::string back_left_wheel_name = "joint_back_left_wheel";
+	int front_left_wheel_name = 1;
+	int front_right_wheel_name = 4;
+	int back_right_wheel_name = 3;
+	int back_left_wheel_name = 2;
 
 	wheels.emplace_back(front_left_wheel_name, connection);
 	wheels.emplace_back(front_right_wheel_name, connection);
@@ -147,8 +156,9 @@ void Robotnik::connectToWheels()
 
 void Robotnik::setSensors()
 {
-	connectToProximitySensors();
+	// TODO connectToProximitySensors();
 	connectToOrientationSensor();
+  connectToAccelerometerSensor();
 	connectToP3DXPositionSensor();
 	connectToPositionSensor();
 }
@@ -167,20 +177,24 @@ void Robotnik::setActuators()
 
 void Robotnik::setMonitors()
 {
+  /*
 	for (RangeVREPSensor &s : range_sensors)
 	{
 		range_monitor.insertSensor(&s);
 	}
+  //*/
 	position_monitor.insertSensor(&position_sensor);
 	orientation_monitor.insertSensor(&orientation_sensor);
+	accelerometer_monitor.insertSensor(&acceleration_sensor);
 	p3dx_position_monitor.insertSensor(&p3dx_position_sensor);
 }
 
 void Robotnik::setAnalyzes()
 {
-	range_monitor.attach(&range_analyze);
+	// TODO range_monitor.attach(&range_analyze);
 	position_monitor.attach(&position_analyze);
 	orientation_monitor.attach(&orientation_analyze);
+  accelerometer_monitor.attach(&accelerometer_analyze);
 	p3dx_position_monitor.attach(&p3dx_position_analyze);
 
 }
@@ -188,6 +202,7 @@ void Robotnik::setAnalyzes()
 void Robotnik::setVisualizers()
 {
 	orientation_monitor.attach( &(knowledge.getRobotModel()));
+	accelerometer_monitor.attach( &(knowledge.getRobotModel()));
 	position_monitor.attach( &(knowledge.getRobotModel()));
 //	file_visualizer.setPipeline(&pipeline);
 }
@@ -211,5 +226,5 @@ void Robotnik::setKnowledge()
 
 void Robotnik::setReactiveModels()
 {
-	range_monitor.attach(&knowledge.getAvoidWallModel());
+	// range_monitor.attach(&knowledge.getAvoidWallModel());
 }

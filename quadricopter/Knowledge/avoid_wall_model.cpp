@@ -28,11 +28,12 @@ AvoidWallModel::AvoidWallModel(Pipeline *pipeline)
 
 void AvoidWallModel::react()
 {
+  /*
 	double left_v = base_speed;
 	double right_v = base_speed;
 	for (int i = 0; i < 3; ++i)
 	{
-		double d = this->observed_value[i].getZ();
+		double d = this->observed_value[i].getZ(); // TODO observed_value pode estar null talvez. checar
 		if (this->observed_value[i].isValid() && d < no_detection_distance)
 		{
 			if (d > min_detection_distance)
@@ -57,7 +58,7 @@ void AvoidWallModel::react()
 //		std::cout << std::fixed  << std::setprecision(3) << p.getZ() << " ";
 //	}
 //	std::cout << "\n";
-
+//*/
 }
 
 

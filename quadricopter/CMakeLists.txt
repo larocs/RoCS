@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.9)
 
-set(PROJECT_ALIAS robotnik_follow)
+set(PROJECT_ALIAS quadricopter)
 
 project(${PROJECT_ALIAS})
 

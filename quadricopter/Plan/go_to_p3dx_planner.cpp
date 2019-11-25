@@ -8,8 +8,8 @@
 #include "../Execute/Actions/go_to_position.h"
 
 GoToP3DXPlanner::GoToP3DXPlanner(Knowledge &knowledge, PassVREPPosition &position_analyze,
-		PassVREPOrientation &orientation_analyze, PassRobotnikPosition &p3dx_positon_analyze_)
-	:Planner(knowledge), position_analyze(position_analyze), orientation_analyze(orientation_analyze),
+		PassVREPOrientation &orientation_analyze, PassVREPAccelerometer &accelerometer_analyze, PassRobotnikPosition &p3dx_positon_analyze_)
+	:Planner(knowledge), position_analyze(position_analyze), orientation_analyze(orientation_analyze), accelerometer_analyze(accelerometer_analyze),
 	p3dx_positon_analyze(p3dx_positon_analyze_), state(1),
 	 destination(2, 2, 0.1387)
 {

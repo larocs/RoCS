@@ -9,7 +9,8 @@
 #include <iostream>
 
 RobotnikModel::RobotnikModel()
-	:RobotModel("Robotnik_Summit_XL"), robot_position{}, robot_orientation{}
+// TODO	:RobotModel("Robotnik_Summit_XL"), robot_position{}, robot_orientation{}
+	:RobotModel("Quadricopter"), robot_position{}, robot_orientation{}
 {
 
 }
