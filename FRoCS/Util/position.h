@@ -17,8 +17,18 @@ protected:
 	double y;
 	double z;
 	bool valid;
+  std::chrono::steady_clock::time_point time;
 
 public:
+	Position(double x_, double y_, double z_, std::chrono::steady_clock::time_point time_)
+	{
+		x = x_;
+		y = y_;
+		z = z_;
+    time = time_;
+		valid = true;
+	}
+
 	Position(double x_, double y_, double z_)
 	{
 		x = x_;
@@ -39,6 +49,14 @@ public:
 	{
 	}
 
+	void setPosition(double x_, double y_, double z_, std::chrono::steady_clock::time_point time_)
+	{
+		x = x_;
+		y = y_;
+		z = z_;
+    time = time_;
+		valid = true;
+	}
 
 	void setPosition(double x_, double y_, double z_)
 	{
@@ -115,6 +133,10 @@ public:
 	{
 		return z;
 	}
+
+  std::chrono::steady_clock::time_point getTime(){
+      return time;
+  }
 
 	bool isValid() const
 	{
