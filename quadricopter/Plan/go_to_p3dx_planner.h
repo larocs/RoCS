@@ -22,6 +22,7 @@ private:
 	PassVREPAccelerometer &accelerometer_analyze;
 	PassRobotnikPosition &p3dx_positon_analyze;
 
+
 	int state;
 	Position destination;
 
@@ -31,6 +32,15 @@ public:
 
 	void planIteration() override;
 
+  struct Lasts{
+    float pAlphaE=0;
+    float pBetaE=0;
+    float psp2=0;
+    float psp1=0;
+
+    float prevEuler=0;
+    Position prevPos=Position();
+  }lasts;
 };
 
 

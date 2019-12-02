@@ -23,8 +23,8 @@ void GoToP3DXPlanner::planIteration()
 	{
 //		std::cout << position_analyze.getValue()[0] << "\n";
 		Position pos(position_analyze.getValue()[0]);
-
 		destination = p3dx_positon_analyze.getValue()[0];
+
 //		std::cout << destination << "\n";
 //		if (dif_vector.abs() < distance_threshold)
 //		{
@@ -54,7 +54,7 @@ void GoToP3DXPlanner::planIteration()
 //		std::cout << orientation_analyze.getValue()[0] << '\n';
 
 		std::shared_ptr<Action> go_to_origin(new GoToPosition("GoToPosition", 1, pipeline, position_analyze.getValue()[0],
-		                                                      orientation_analyze.getValue()[0], destination));
+		                                                      orientation_analyze.getValue()[0], destination, &lasts));
 		pipeline->push(go_to_origin);
 
 

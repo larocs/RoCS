@@ -21,7 +21,9 @@ public:
 	WheelVREP(int name_, Connection &connection_);
 
 	void setSpeed(double speed);
-
+	void setSpeeds(double speed1, double speed2, double speed3, double speed4);
+  float *getMatrix();
+  float getVelocity();
 };
 
 #endif // PIONEER_WHEEL_VREP_H_

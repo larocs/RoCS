@@ -21,9 +21,11 @@ private:
 
 	double left_wheel_speed;
 	double right_wheel_speed;
+  double back_left;
+  double back_right;
 
 public:
-	SetWheelsSpeed(const std::string &name_, double value_, Pipeline *pipeline_, double left_wheel_speed_, double right_wheel_speed_);
+	SetWheelsSpeed(const std::string &name_, double value_, Pipeline *pipeline_, double left_wheel_speed_, double back_left, double back_right, double right_wheel_speed_);
 
 	void setActuators(std::vector<std::vector<Actuator *> > &actuators) override;
 

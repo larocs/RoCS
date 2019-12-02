@@ -7,9 +7,9 @@
 #include "set_wheels_speed.h"
 
 SetWheelsSpeed::SetWheelsSpeed(const std::string &name_, double value_, Pipeline *pipeline_, double left_wheel_speed_,
-                               double right_wheel_speed_)
+                               double back_left, double back_right, double right_wheel_speed_)
 	:Action(name_, value_, pipeline_), left_wheel(nullptr), right_wheel(nullptr), left_wheel_speed(left_wheel_speed_),
-	 right_wheel_speed(right_wheel_speed_)
+	 right_wheel_speed(right_wheel_speed_),  back_left(back_left), back_right(back_right)
 {
 
 }
@@ -35,13 +35,15 @@ void SetWheelsSpeed::setActuators(std::vector<std::vector<Actuator *> > &actuato
 
 void SetWheelsSpeed::act()
 {
-	if (left_wheel && right_wheel)
+	if (left_wheel && right_wheel && back_left_wheel && back_right_wheel)
 	{
-//		std::cout << "Actuator go\n";
-    (*left_wheel).setSpeed(56.2);
-		(*right_wheel).setSpeed(50.2);
-		(*back_left_wheel).setSpeed(50.2);
-		(*back_right_wheel).setSpeed(50.2);
+		std::cout << "Actuator go\n";
+/*    (*left_wheel).setSpeed(left_wheel_speed);
+		(*right_wheel).setSpeed(right_wheel_speed);
+		(*back_left_wheel).setSpeed(back_left);
+		(*back_right_wheel).setSpeed(back_right);
+ */
+    (*left_wheel).setSpeeds(left_wheel_speed,back_left,back_right,right_wheel_speed);
 	}
 	else
 	{

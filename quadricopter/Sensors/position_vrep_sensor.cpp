@@ -40,7 +40,7 @@ bool PositionVREPSensor::getData(Position &value)
 	if (simx_return_ok == simxGetObjectPosition(connection.getClientId(), handle, -1, pos, simx_opmode_buffer))
 	{
 //		std::cout << "GetDataPosition: " << pos[0] << " " <<  pos[1]<< " " <<  pos[2] <<std::endl;
-		value.setPosition(pos[0], pos[1], pos[2]);
+		value.setPosition(pos[0], pos[1], pos[2], std::chrono::steady_clock::now());
 		return true;
 	}
 //	std::cout << "nao deu \n";
