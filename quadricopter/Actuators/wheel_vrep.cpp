@@ -34,9 +34,8 @@ WheelVREP::WheelVREP(int name_, Connection &connection_)
 }
 
 float WheelVREP::getVelocity(){
-  int *len; // If gives an error, malloc, but unused.
+  int *len=(int*)calloc(1,sizeof(int));
   float **matrix=(float**)calloc(1,sizeof(float*)); //=(float*)calloc(12,sizeof(float));
-  //std::cout << matrix << std::endl;
   simxCallScriptFunction(connection.getClientId(),"Quadricopter",sim_scripttype_childscript,"getVelocity", 0, NULL, 0, NULL,0,NULL,0,NULL,NULL,NULL,len,matrix,NULL,NULL,NULL,NULL,simx_opmode_blocking);
   if(*matrix==0){
     std::cout << "velocity zero!" << std::endl;
@@ -46,9 +45,13 @@ float WheelVREP::getVelocity(){
 }
 
 float* WheelVREP::getMatrix(){
-  int *len; // If gives an error, malloc, but unused.
+  int *len=(int*)calloc(1,sizeof(int));
   float **matrix=(float**)calloc(1,sizeof(float*)); //=(float*)calloc(12,sizeof(float));
-  simxCallScriptFunction(connection.getClientId(),"Quadricopter",sim_scripttype_childscript,"getQuadMatrix", 0, NULL, 0, NULL,0,NULL,0,NULL,NULL,NULL,len,matrix,NULL,NULL,NULL,NULL,simx_opmode_blocking);
+  int ret=simxCallScriptFunction(connection.getClientId(),"Quadricopter",sim_scripttype_childscript,"getQuadMatrix", 0, NULL, 0, NULL,0,NULL,0,NULL,NULL,NULL,len,matrix,NULL,NULL,NULL,NULL,simx_opmode_blocking);
+  if(ret!=simx_return_ok){
+    std::cout << "Nao deu" << std::endl;
+    return NULL;
+  }
   return *matrix;
 }
 

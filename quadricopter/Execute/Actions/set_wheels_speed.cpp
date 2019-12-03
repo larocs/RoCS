@@ -22,9 +22,9 @@ void SetWheelsSpeed::setActuators(std::vector<std::vector<Actuator *> > &actuato
 //	std::string back_left_wheel_name = "joint_back_left_wheel";
 	Action::actuators = actuators;
 	left_wheel = (WheelVREP *) (actuators[0][0]);
-	right_wheel = (WheelVREP *) (actuators[0][1]);
-	back_left_wheel = (WheelVREP *) (actuators[0][3]);
+	back_left_wheel = (WheelVREP *) (actuators[0][1]);
 	back_right_wheel = (WheelVREP *) (actuators[0][2]);
+	right_wheel = (WheelVREP *) (actuators[0][3]);
 
 //    std::cout << actuators[0][0]->getName() << '\n';
 //    std::cout << actuators[0][1]->getName() << '\n';

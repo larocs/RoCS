@@ -28,32 +28,19 @@ void GoToPosition::act()
 {
   if (pipeline){
     float *matrix=left_wheel->getMatrix();
-    //float vel=left_wheel->getVelocity();
+    if(!matrix)
+      return;
+    //float vel=left_wheel->getVelocity(); // TODO if use, check
 		Position res = destination - position;
-/*
-    pAlphaE=0;
-    pBetaE=0;
-    psp2=0;
-    psp1=0;
-
-    prevEuler=0;
-    prevPos=sim.getObjectPosition(d,-1) //{0,0,0.51}
-*/
+    
     // Vertical control:
-    //l=sim.getVelocity(heli)
-    float e=(1-position.getZ()); // (0.51) distance to desired vertical position
-    std::cout << e << std::endl;
-    float pv=e*2; // pParam = 2
-    float timeStep=1000000*(float)std::chrono::duration_cast<std::chrono::microseconds>(position.getTime()-lasts->prevPos.getTime()).count();
-    //if(timeStep==0)
-    //  std::cout << "tempo zero" << std::endl;
-    //float thrust=5.335+pv+(position.getZ()-lasts->prevPos.getZ())/timeStep*(-2); // vParam = -2 / l[3] velocidade
-    float thrust=50.2+pv+(position.getZ()-lasts->prevPos.getZ())/timeStep*(-2); // vParam = -2 / l[3] velocidade
-    //float thrust=5.335+pv+vel*(-2); // vParam = -2 / l[3] velocidade
-    //thrust*=8.7;
+    float pv=(0.7-position.getZ())*2; // (0.51) distance to desired vertical position / pParam=2
+    float timeStep=(float)std::chrono::duration_cast<std::chrono::microseconds>(
+            position.getTime()-lasts->prevPos.getTime()
+          ).count()/1000000;
+    float vel=(position.getZ()-lasts->prevPos.getZ())/timeStep;
+    float thrust=50.2+pv+vel*(-2); // vParam = -2
     lasts->prevPos.setPosition(position.getX(), position.getY(), position.getZ(), position.getTime());
-    //prevPos=pos // update lasts.prevPos
-    // diferenca de altura (position e destino) e velocidade de elevacao
 
     // Horizontal control: 
     //sp=sim.getObjectPosition(targetObj,d)
@@ -107,7 +94,11 @@ void GoToPosition::act()
 		{
     //*/
 //			std::cout << "go ahead\n";
-    alphaCorr=betaCorr=rotCorr=0; // TODO retirar
+    //alphaCorr=betaCorr=rotCorr=0; // TODO retirar
+    float fator=10;
+    alphaCorr/=fator;
+    betaCorr/=fator;
+    rotCorr/=fator;
 	  std::shared_ptr<Action> go_ahead(new SetWheelsSpeed("GoAhead", 1, pipeline, 
           thrust*(1-alphaCorr+betaCorr+rotCorr),
           thrust*(1-alphaCorr-betaCorr-rotCorr),

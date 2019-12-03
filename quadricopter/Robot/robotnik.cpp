@@ -148,9 +148,9 @@ void Robotnik::connectToWheels()
 	int back_left_wheel_name = 2;
 
 	wheels.emplace_back(front_left_wheel_name, connection);
-	wheels.emplace_back(front_right_wheel_name, connection);
-	wheels.emplace_back(back_right_wheel_name, connection);
 	wheels.emplace_back(back_left_wheel_name, connection);
+	wheels.emplace_back(back_right_wheel_name, connection);
+	wheels.emplace_back(front_right_wheel_name, connection);
 
 }
 

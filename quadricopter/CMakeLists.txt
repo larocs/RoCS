@@ -8,7 +8,7 @@ set(CMAKE_CXX_STANDARD 17)
 add_compile_options("-lpthread")
 link_libraries("-lpthread")
 IF (CMAKE_COMPILER_IS_GNUCC)
-    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
+    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -g")
 ENDIF (CMAKE_COMPILER_IS_GNUCC)
 
 #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror -Wall -DBUILD_SHARED_LIBS=OFF")
