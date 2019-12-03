@@ -54,7 +54,8 @@ void GoToP3DXPlanner::planIteration()
 //		std::cout << orientation_analyze.getValue()[0] << '\n';
 
 		std::shared_ptr<Action> go_to_origin(new GoToPosition("GoToPosition", 1, pipeline, position_analyze.getValue()[0],
-		                                                      orientation_analyze.getValue()[0], destination, &lasts));
+		                                                      orientation_analyze.getValue()[0], destination, &lasts,
+                                                          accelerometer_analyze.getValue()[0]));
 		pipeline->push(go_to_origin);
 
 

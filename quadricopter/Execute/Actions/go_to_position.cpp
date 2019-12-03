@@ -10,9 +10,10 @@
 #include "set_wheels_speed.h"
 
 GoToPosition::GoToPosition(const std::string &name_, double value_, Pipeline *pipeline_,
-                           Position position_, Orientation orientation_, Position destination_, GoToP3DXPlanner::Lasts *lasts_)
+                           Position position_, Orientation orientation_, Position destination_,
+                           GoToP3DXPlanner::Lasts *lasts_, Orientation acceleration_)
 	:Action(name_, value_, pipeline_), left_wheel(nullptr), right_wheel(nullptr), position(position_), lasts(lasts_),
-	 orientation(orientation_), destination(destination_), angle_threshold(0.1), distance_threshold(1.2)
+	 orientation(orientation_), destination(destination_), angle_threshold(0.1), distance_threshold(1.2), acceleration(acceleration_)
 {
 
 }
@@ -27,11 +28,10 @@ void GoToPosition::setActuators(std::vector<std::vector<Actuator *> > &actuators
 void GoToPosition::act()
 {
   if (pipeline){
-    float *matrix=left_wheel->getMatrix();
-    if(!matrix)
-      return;
+    //float *matrix=left_wheel->getMatrix();
+    //if(!matrix)
+    //  return;
     //float vel=left_wheel->getVelocity(); // TODO if use, check
-		Position res = destination - position;
     
     // Vertical control:
     float pv=(0.7-position.getZ())*2; // (0.51) distance to desired vertical position / pParam=2
@@ -43,6 +43,7 @@ void GoToPosition::act()
     lasts->prevPos.setPosition(position.getX(), position.getY(), position.getZ(), position.getTime());
 
     // Horizontal control: 
+		Position res = destination - position;
     //sp=sim.getObjectPosition(targetObj,d)
     //m=sim.getObjectMatrix(d,-1)
     //vx={1,0,0}
@@ -50,21 +51,34 @@ void GoToPosition::act()
     //vy={0,1,0}
     //vy=sim.multiplyVector(m,vy)
     //alphaE=(vy[3]-m[12])
-    float alphaE=(matrix[9]-matrix[11]);
-    float alphaCorr=0.25*alphaE+2.1*(alphaE-lasts->pAlphaE);
-    float betaE=(matrix[8]-matrix[11]);
-    float betaCorr=-0.25*betaE-2.1*(betaE-lasts->pBetaE);
+    //std::cout << "Orientation: " << orientation << std::endl;
+    //std::cout << "Acceleration: " << acceleration << std::endl;
+    //std::cout << "Matrix (alpha/beta): " << (matrix[9]-matrix[11]) << "/" << (matrix[8]-matrix[11]) << std::endl;
+    //std::cout << "\n";
+    float alphaE=orientation.getAlpha(); //(matrix[9]-matrix[11]);
+    if(lasts->pAlphaE==0)
+      lasts->pAlphaE=alphaE;
+    float alphaCorr=0.1*alphaE+0.5*(alphaE-lasts->pAlphaE); // TODO 0.07 and 0.25 ok too
+    
+    float betaE=orientation.getBeta(); //(matrix[8]-matrix[11]);
+    if(lasts->pBetaE==0)
+      lasts->pBetaE=betaE;
+    float betaCorr=0.1*betaE+0.5*(betaE-lasts->pBetaE);
+    //float betaCorr=-0.25*betaE-2.1*(betaE-lasts->pBetaE);
+    
     lasts->pAlphaE=alphaE;
     lasts->pBetaE=betaE;
+
     // alphaCorr=alphaCorr+sp[2]*0.005+1*(sp[2]-psp2)
-    alphaCorr=alphaCorr+position.getY()*0.005+1*(position.getY()-lasts->psp2);
-    betaCorr=betaCorr-position.getX()*0.005-1*(position.getX()-lasts->psp1);
-    lasts->psp2=position.getY();
-    lasts->psp1=position.getX();
+    alphaCorr=alphaCorr+res.getY()*0.0005+0.02*(res.getY()-lasts->psp2);
+    betaCorr=betaCorr-res.getX()*0.0005-0.02*(res.getX()-lasts->psp1);
+    
+    lasts->psp2=res.getY();
+    lasts->psp1=res.getX();
     // Position e Matrix
     
     // Rotational control:
-    float rotCorr=0;
+    float rotCorr=0; // TODO here
     /*euler=sim.getObjectOrientation(d,targetObj)
     rotCorr=euler[3]*0.1+2*(euler[3]-prevEuler)
     prevEuler=euler[3] */
@@ -94,8 +108,15 @@ void GoToPosition::act()
 		{
     //*/
 //			std::cout << "go ahead\n";
+   /* 
+    float alphaE=acceleration.getAlpha();
+    float alphaCorr=alphaE*-30;//-2.1*(alphaE-lasts->pAlphaE);
+    float betaE=acceleration.getBeta();
+    float betaCorr=betaE*-30;
+*/
     //alphaCorr=betaCorr=rotCorr=0; // TODO retirar
-    float fator=10;
+    //betaCorr=0;
+    float fator=1;
     alphaCorr/=fator;
     betaCorr/=fator;
     rotCorr/=fator;
@@ -107,6 +128,10 @@ void GoToPosition::act()
           //thrust*(1-alphaCorr+betaCorr+rotCorr),
           //thrust*(1-alphaCorr-betaCorr-rotCorr),
           //thrust*(1+alphaCorr-betaCorr+rotCorr)
+  //         thrust*(1+alphaCorr-betaCorr+rotCorr),
+  //         thrust*(1-alphaCorr-betaCorr-rotCorr),
+  //         thrust*(1-alphaCorr+betaCorr+rotCorr),
+  //         thrust*(1+alphaCorr+betaCorr-rotCorr)
         ));
 		pipeline->push(go_ahead);
     //*/

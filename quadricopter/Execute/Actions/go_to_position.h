@@ -19,13 +19,14 @@ private:
 	WheelVREP *right_wheel;
 	Position position;
 	Orientation orientation;
+	Orientation acceleration;
 	Position destination;
 	double angle_threshold;
 	double distance_threshold;
   GoToP3DXPlanner::Lasts *lasts;
 
 public:
-	GoToPosition(const std::string &name_, double value_, Pipeline *pipeline_, Position position_, Orientation orientation_, Position destination_, GoToP3DXPlanner::Lasts *lasts_);
+	GoToPosition(const std::string &name_, double value_, Pipeline *pipeline_, Position position_, Orientation orientation_, Position destination_, GoToP3DXPlanner::Lasts *lasts_, Orientation acceleration_);
 
 	void setActuators(std::vector<std::vector<Actuator *> > &actuators) override;
 
