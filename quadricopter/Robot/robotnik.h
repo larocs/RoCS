@@ -1,7 +1,7 @@
 //
 // Laboratory of Robotics and Cognitive Science
-// Created by:  Leonardo de Oliveira Ramos
-// Github:      https://github.com/oramleo
+// Created by:  Alex Lucchesi de Oliveira
+// Github:      https://github.com/larocs/RoCS
 //
 
 #ifndef PIONEER_PIONEER_P3DX_H
@@ -108,7 +108,7 @@ private:
 
 
 public:
-	Robotnik();
+	Robotnik(int);
 
 	void run();
 

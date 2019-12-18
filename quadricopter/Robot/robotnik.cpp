@@ -1,7 +1,7 @@
 //
 // Laboratory of Robotics and Cognitive Science
-// Created by:  Leonardo de Oliveira Ramos
-// Github:      https://github.com/oramleo
+// Created by:  Alex Lucchesi de Oliveira
+// Github:      https://github.com/larocs/RoCS
 //
 
 #include "robotnik.h"
@@ -12,13 +12,13 @@ extern "C"
 #include <include/v_repConst.h>
 }
 
-Robotnik::Robotnik()
+Robotnik::Robotnik(int runType)
 	:Robot("Quadricopter"), connection(knowledge.getConnection()), /*range_sensors(),*/ orientation_sensor(connection),
    acceleration_sensor(connection), position_sensor(connection), p3dx_position_sensor(connection), wheels(),
 	 wheel_ptrs(), /*range_monitor(knowledge),*/ position_monitor(knowledge), orientation_monitor(knowledge),
    accelerometer_monitor(knowledge), p3dx_position_monitor(knowledge), /*range_analyze(knowledge),*/ position_analyze(knowledge),
 	 orientation_analyze(knowledge), accelerometer_analyze(knowledge), p3dx_position_analyze(knowledge),
-   planner(knowledge, position_analyze, orientation_analyze, accelerometer_analyze, p3dx_position_analyze), file_visualizer{knowledge}, lifetime(300)
+   planner(knowledge, position_analyze, orientation_analyze, accelerometer_analyze, p3dx_position_analyze, runType), file_visualizer{knowledge}, lifetime(300)
 {
 	verifyConnection();
 

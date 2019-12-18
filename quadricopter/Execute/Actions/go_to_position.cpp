@@ -58,20 +58,23 @@ void GoToPosition::act()
     float alphaE=orientation.getAlpha(); //(matrix[9]-matrix[11]);
     if(lasts->pAlphaE==0)
       lasts->pAlphaE=alphaE;
-    float alphaCorr=0.1*alphaE+0.5*(alphaE-lasts->pAlphaE); // TODO 0.07 and 0.25 ok too
+    float alphaCorr=0.07*alphaE+0.25*(alphaE-lasts->pAlphaE); // TODO 0.1 and 0.5 with other drone
     
     float betaE=orientation.getBeta(); //(matrix[8]-matrix[11]);
     if(lasts->pBetaE==0)
       lasts->pBetaE=betaE;
-    float betaCorr=0.1*betaE+0.5*(betaE-lasts->pBetaE);
+    float betaCorr=0.07*betaE+0.25*(betaE-lasts->pBetaE);
     //float betaCorr=-0.25*betaE-2.1*(betaE-lasts->pBetaE);
     
     lasts->pAlphaE=alphaE;
     lasts->pBetaE=betaE;
 
     // alphaCorr=alphaCorr+sp[2]*0.005+1*(sp[2]-psp2)
-    alphaCorr=alphaCorr+res.getY()*0.0005+0.02*(res.getY()-lasts->psp2);
-    betaCorr=betaCorr-res.getX()*0.0005-0.02*(res.getX()-lasts->psp1);
+    alphaCorr=alphaCorr+res.getY()*0.001+0.03*(res.getY()-lasts->psp2); // TODO 0.0005 and 0.02 with other drone
+    betaCorr=betaCorr-res.getX()*0.001-0.03*(res.getX()-lasts->psp1);
+    std::cout << alphaCorr << std::endl;
+    alphaCorr=alphaCorr>0.02 || alphaCorr<-0.02 ?0.02:alphaCorr;
+    betaCorr=betaCorr>0.02 || betaCorr<-0.02 ?0.02:betaCorr;
     
     lasts->psp2=res.getY();
     lasts->psp1=res.getX();

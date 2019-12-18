@@ -1,7 +1,7 @@
 //
 // Laboratory of Robotics and Cognitive Science
-// Created by:  Leonardo de Oliveira Ramos
-// Github:      https://github.com/oramleo
+// Created by:  Alex Lucchesi de Oliveira
+// Github:      https://github.com/larocs/RoCS
 //
 
 #ifndef PIONEER_GO_TO_ORIGIN_PLANNER_H
@@ -22,13 +22,13 @@ private:
 	PassVREPAccelerometer &accelerometer_analyze;
 	PassRobotnikPosition &p3dx_positon_analyze;
 
-
+  int runType;
 	int state;
 	Position destination;
 
 public:
 	GoToP3DXPlanner(Knowledge &knowledge, PassVREPPosition &position_analyze, PassVREPOrientation &orientation_analyze,
-      PassVREPAccelerometer &accelerometer_analyze, PassRobotnikPosition &p3dx_positon_analyze_);
+      PassVREPAccelerometer &accelerometer_analyze, PassRobotnikPosition &p3dx_positon_analyze_, int runType);
 
 	void planIteration() override;
 

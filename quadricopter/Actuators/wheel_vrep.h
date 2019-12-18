@@ -1,7 +1,7 @@
 //
 // Laboratory of Robotics and Cognitive Science
-// Created by:  Leonardo de Oliveira Ramos
-// Github:      https://github.com/oramleo
+// Created by:  Alex Lucchesi de Oliveira
+// Github:      https://github.com/larocs/RoCS
 //
 
 #ifndef PIONEER_WHEEL_VREP_H_
@@ -22,8 +22,6 @@ public:
 
 	void setSpeed(double speed);
 	void setSpeeds(double speed1, double speed2, double speed3, double speed4);
-  float *getMatrix();
-  float getVelocity();
 };
 
 #endif // PIONEER_WHEEL_VREP_H_
