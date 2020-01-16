@@ -33,10 +33,10 @@ public:
 	void planIteration() override;
 
   struct Lasts{
-    float pAlphaE=0;
-    float pBetaE=0;
-    float psp2=0;
-    float psp1=0;
+    float pAlphaE = 0;
+    float pBetaE = 0;
+    float pAlphaI = 0;
+    float pBetaI = 0;
 
     float prevEuler=0;
     Position prevPos=Position();
