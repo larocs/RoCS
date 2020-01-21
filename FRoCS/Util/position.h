@@ -151,7 +151,7 @@ public:
 
 	friend std::ostream &operator<<(std::ostream &os, const Position &position)
 	{
-		os << "x: " << position.x << " y: " << position.y << " z: " << position.z << " valid: " << position.valid;
+		// os << "x: " << position.x << " y: " << position.y << " z: " << position.z << " valid: " << position.valid;
 		return os;
 	}
 
