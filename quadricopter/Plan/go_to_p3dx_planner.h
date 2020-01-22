@@ -22,9 +22,9 @@ private:
 	PassVREPAccelerometer &accelerometer_analyze;
 	PassRobotnikPosition &p3dx_positon_analyze;
 
-  int runType;
 	int state;
 	Position destination;
+  int runType;
 
 public:
 	GoToP3DXPlanner(Knowledge &knowledge, PassVREPPosition &position_analyze, PassVREPOrientation &orientation_analyze,

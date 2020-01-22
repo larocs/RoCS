@@ -13,7 +13,7 @@
 #include "wheel_vrep.h"
 
 WheelVREP::WheelVREP(int name_, Connection &connection_)
-	:RotaryMotor("motor"), rotorNumber(name_), handle(-1), connection(connection_)
+	:RotaryMotor("motor"), handle(-1), connection(connection_), rotorNumber(name_)
 {
   setSpeed(50.2);
 }
